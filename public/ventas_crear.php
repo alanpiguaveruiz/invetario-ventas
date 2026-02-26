@@ -1,31 +1,43 @@
 <?php
 require_once '../controllers/VentaController.php';
-require_once '../models/producto.php';
 require_once '../config/database.php';
-
-$db = new Database();
-$conexion = $db->conectar();
-
-$productoModel = new Producto($conexion);
-$productos = $productoModel->obtenerTodos();
 
 $error = '';
 
+/* ==============================
+   ENDPOINT AJAX PARA BUSCAR PRODUCTO
+============================== */
+if (isset($_GET['action']) && $_GET['action'] == 'buscar') {
+
+    $controller = new VentaController();
+    $producto = $controller->buscarProducto($_GET['id']);
+
+    header('Content-Type: application/json');
+    echo json_encode($producto);
+    exit;
+}
+
+
+/* ==============================
+   PROCESAR REGISTRO DE VENTA
+============================== */
 if ($_POST) {
 
     $items = [];
 
-    foreach ($_POST['cantidad'] as $producto_id => $cantidad) {
-        if ($cantidad > 0) {
-            $items[] = [
-                'producto_id' => $producto_id,
-                'cantidad' => $cantidad
-            ];
+    if (!empty($_POST['productos'])) {
+        foreach ($_POST['productos'] as $prod) {
+            if ($prod['cantidad'] > 0) {
+                $items[] = [
+                    'producto_id' => $prod['id'],
+                    'cantidad' => $prod['cantidad']
+                ];
+            }
         }
     }
 
     if (empty($items)) {
-        $error = "Debes seleccionar al menos un producto";
+        $error = "Debes agregar al menos un producto";
     } else {
         $controller = new VentaController();
         $resultado = $controller->store($items);
@@ -46,36 +58,31 @@ if ($_POST) {
 <p style="color:red"><?= $error ?></p>
 <?php endif; ?>
 
+<label>ID Producto:</label>
+<input type="number" id="producto_id">
+<button type="button" onclick="agregarProducto()">Agregar</button>
+
+<br><br>
+
 <form method="post">
-<table border="1">
-<tr>
-    <th>Producto</th>
-    <th>Precio</th>
-    <th>Stock</th>
-    <th>Cantidad</th>
-</tr>
+    <table border="1" id="tablaProductos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-<?php foreach ($productos as $p): ?>
-<tr>
-    <td><?= $p['nombre'] ?></td>
-    <td>$<?= $p['precio'] ?></td>
-    <td><?= $p['stock'] ?></td>
-    <td>
-        <input 
-            type="number" 
-            name="cantidad[<?= $p['id'] ?>]" 
-            min="0" 
-            max="<?= $p['stock'] ?>" 
-            value="0"
-        >
-    </td>
-</tr>
-<?php endforeach; ?>
-
-</table>
-
-<br>
-<button type="submit">Registrar Venta</button>
+    <br>
+    <button type="submit">Registrar Venta</button>
 </form>
 
+<br>
 <a href="ventas_listar.php">Ver Ventas</a>
+
+<script src="js/ventas.js"></script>

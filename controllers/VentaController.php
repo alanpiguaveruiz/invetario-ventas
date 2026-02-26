@@ -61,5 +61,15 @@ class VentaController {
             return $e->getMessage();
         }
     }
+
+
+    public function buscarProducto($id) {
+        $db = new Database();
+        $conexion = $db->conectar();
+
+        $producto = new Producto($conexion);
+        return $producto->obtenerPorId($id);
+    }
+
 }
 ?>
