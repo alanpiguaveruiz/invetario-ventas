@@ -1,0 +1,33 @@
+<?php
+require_once '../models/venta.php';
+require_once '../config/database.php';
+
+$db = new Database();
+$conexion = $db->conectar();
+
+$ventaModel = new Venta($conexion);
+$ventas = $ventaModel->obtenerTodas();
+?>
+
+<h2>Listado de Ventas</h2>
+
+<table border="1">
+<tr>
+    <th>ID</th>
+    <th>Fecha</th>
+    <th>Total</th>
+    <th>Estado</th>
+</tr>
+
+<?php foreach ($ventas as $v): ?>
+<tr>
+    <td><?= $v['id'] ?></td>
+    <td><?= $v['fecha'] ?></td>
+    <td>$<?= $v['total'] ?></td>
+    <td><?= $v['estado'] ?></td>
+</tr>
+<?php endforeach; ?>
+</table>
+
+<br>
+<a href="ventas_crear.php">Nueva Venta</a>

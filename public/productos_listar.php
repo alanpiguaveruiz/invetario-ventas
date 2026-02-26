@@ -7,7 +7,7 @@ $productos = $controller->index();
 <h2>Productos agrícolas</h2>
 <a href="productos_crear.php">Nuevo producto</a>
 
-<table border="1" cellpadding="5">
+<table border="1">
 <tr>
     <th>ID</th><th>Nombre</th><th>Tipo</th><th>Precio</th><th>Stock</th><th>Acciones</th>
 </tr>
