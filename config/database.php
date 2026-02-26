@@ -25,3 +25,5 @@ $db = new Database();
 $conexion = $db->conectar();
 
 echo "Conexión OK";
+
+?>
