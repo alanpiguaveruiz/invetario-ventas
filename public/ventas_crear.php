@@ -70,7 +70,9 @@ if ($_POST) {
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                
                 <th>Precio</th>
+                <th>Stock</th>
                 <th>Cantidad</th>
             </tr>
         </thead>

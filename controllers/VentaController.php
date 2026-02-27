@@ -70,6 +70,74 @@ class VentaController {
         $producto = new Producto($conexion);
         return $producto->obtenerPorId($id);
     }
+    
+    
+   
+    public function anular($venta_id){
 
+    $db = new Database();
+    $conexion = $db->conectar();
+
+    try {
+
+        $conexion->beginTransaction();
+
+        // 1. Verificar venta
+        $stmt = $conexion->prepare("SELECT * FROM ventas WHERE id = ?");
+        $stmt->execute([$venta_id]);
+        $venta = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$venta) {
+            throw new Exception("Venta no encontrada");
+        }
+
+        if ($venta['estado'] === 'Anulada') {
+            throw new Exception("La venta ya está anulada");
+        }
+
+        // 2. Obtener detalles
+        $stmt = $conexion->prepare("SELECT * FROM detalle_ventas WHERE venta_id = ?");
+        $stmt->execute([$venta_id]);
+        $detalles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // 3. Devolver stock
+        foreach ($detalles as $detalle) {
+
+            $stmtUpdate = $conexion->prepare("
+                UPDATE productos 
+                SET stock = stock + ? 
+                WHERE id = ?
+            ");
+
+            $stmtUpdate->execute([
+                $detalle['cantidad'],
+                $detalle['producto_id']
+            ]);
+        }
+
+        // 4. Cambiar estado
+        $stmt = $conexion->prepare("
+            UPDATE ventas 
+            SET estado = 'Anulada' 
+            WHERE id = ?
+        ");
+
+        $stmt->execute([$venta_id]);
+
+        $conexion->commit();
+        return true;
+
+    } catch (Exception $e) {
+        $conexion->rollBack();
+        return $e->getMessage();
+    }
+}
+    
+    
+    
+    
+    
+    
+    
 }
 ?>
