@@ -6,7 +6,7 @@ $error = '';
 if ($_POST) {
     $resultado = $controller->store($_POST);
     if ($resultado === true) {
-        header('Location: productos_listar.php');
+        header('Location: index.php?modulo=productos_listar');
         exit;
     } else {
         $error = $resultado;
@@ -34,4 +34,4 @@ if ($_POST) {
     <button type="submit">Guardar</button>
 </form>
 
-<a href="productos_listar.php">Volver</a>
+<a href="index.php?modulo=productos_listar">Volver</a>

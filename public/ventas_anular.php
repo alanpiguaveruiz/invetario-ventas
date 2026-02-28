@@ -9,7 +9,7 @@ $controller = new VentaController();
 $resultado = $controller->anular($_GET['id']);
 
 if ($resultado === true) {
-    header("Location: ventas_listar.php");
+    header("Location: index.php?modulo=ventas_listar");
 } else {
     echo "Error: " . $resultado;
 }

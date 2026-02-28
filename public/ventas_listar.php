@@ -9,8 +9,14 @@ $ventaModel = new Venta($conexion);
 $ventas = $ventaModel->obtenerTodas();
 ?>
 
-<h2>Listado de Ventas</h2>
+<!-- Botón Nueva Venta arriba -->
 
+
+
+<h2>Listado de Ventas</h2>
+<br>
+<a href="index.php?modulo=ventas_crear">Nueva Venta</a>
+<br><br>
 <table border="1">
 <tr>
     <th>ID</th>
@@ -39,6 +45,3 @@ $ventas = $ventaModel->obtenerTodas();
 </tr>
 <?php endforeach; ?>
 </table>
-
-<br>
-<a href="ventas_crear.php">Nueva Venta</a>

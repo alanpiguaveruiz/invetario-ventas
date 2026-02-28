@@ -7,6 +7,6 @@ if ($id) {
     $controller->delete($id);
 }
 
-header('Location: productos_listar.php');
+header('Location: index.php?modulo=productos_listar');
 exit;
 ?>

@@ -5,8 +5,9 @@ $productos = $controller->index();
 ?>
 
 <h2>Productos agrícolas</h2>
-<a href="productos_crear.php">Nuevo producto</a>
-
+<br>
+<a href="index.php?modulo=productos_crear">Nuevo producto</a>
+<br><br>
 <table border="1">
 <tr>
     <th>ID</th><th>Nombre</th><th>Tipo</th><th>Precio</th><th>Stock</th><th>Acciones</th>
@@ -19,10 +20,11 @@ $productos = $controller->index();
     <td><?= $p['precio'] ?></td>
     <td><?= $p['stock'] ?></td>
     <td>
-        <a href="productos_editar.php?id=<?= $p['id'] ?>">Editar</a>
+        <a href="index.php?modulo=productos_editar&id=<?= $p['id'] ?>">Editar</a>
         <a href="productos_eliminar.php?id=<?= $p['id'] ?>" onclick="return confirm('¿Eliminar?')">Eliminar</a>
     </td>
 </tr>
 <?php endforeach; ?>
 
 </table>
+

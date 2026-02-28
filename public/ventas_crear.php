@@ -43,7 +43,7 @@ if ($_POST) {
         $resultado = $controller->store($items);
 
         if ($resultado === true) {
-            header("Location: ventas_listar.php");
+            header("Location: index.php?modulo=ventas_listar");
             exit;
         } else {
             $error = $resultado;
@@ -52,14 +52,15 @@ if ($_POST) {
 }
 ?>
 
-<h2>Nueva Venta</h2>
+<div><h2>Nueva Venta</h2><br><a href="index.php?modulo=ventas_listar">Ver Ventas</a></div>
 
 <?php if ($error): ?>
 <p style="color:red"><?= $error ?></p>
 <?php endif; ?>
-
+<br>
 <label>ID Producto:</label>
 <input type="number" id="producto_id">
+<br><br>
 <button type="button" onclick="agregarProducto()">Agregar</button>
 
 <br><br>
@@ -85,6 +86,7 @@ if ($_POST) {
 </form>
 
 <br>
-<a href="ventas_listar.php">Ver Ventas</a>
+
+
 
 <script src="js/ventas.js"></script>
