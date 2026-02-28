@@ -3,12 +3,12 @@
 $modulo = $_GET['modulo'] ?? 'home'; // si no hay módulo, mostrar home
 ?>
 
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Inventario</title>
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
