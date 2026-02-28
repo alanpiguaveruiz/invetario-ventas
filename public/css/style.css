@@ -174,3 +174,14 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
+
+/* Fondo solo cuando es Home */
+.body-home {
+    background-image: url('../img/fondo.png')!important; 
+    background-size: cover!important; 
+    background-position: center!important; 
+    background-repeat: no-repeat!important; 
+    background-attachment: fixed!important; 
+}

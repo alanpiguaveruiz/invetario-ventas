@@ -10,7 +10,7 @@ $modulo = $_GET['modulo'] ?? 'home'; // si no hay módulo, mostrar home
     <title>Dashboard Inventario</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="<?= $modulo === 'home' ? 'body-home' : '' ?>">
     <header>
         <h1>Panel de Control - Inventario y Ventas</h1>
         <nav>
@@ -48,6 +48,7 @@ $modulo = $_GET['modulo'] ?? 'home'; // si no hay módulo, mostrar home
             default:
                 echo '<h2>Bienvenido al Dashboard</h2>
                       <p>Selecciona un módulo para comenzar</p>';
+        
         }
         ?>
     </main>
