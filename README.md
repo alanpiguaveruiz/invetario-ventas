@@ -336,6 +336,8 @@ El usuario puede ingresar la información básica necesaria para almacenar el pr
 
 <img width="1410" height="675" alt="image" src="https://github.com/user-attachments/assets/04551f80-cb88-4fac-9156-c4f6e141b423" />
 
+### No permite stock negativo y lanza un mensaje de stock invalido
+<img width="1763" height="844" alt="image" src="https://github.com/user-attachments/assets/17b7c9b5-bbbc-458a-a029-6839d9bbbd5b" />
 
 ---
 
